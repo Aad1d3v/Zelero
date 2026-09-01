@@ -1,0 +1,42 @@
+# Render Blueprint — one-click deploy for Zelero (https://render.com/docs/blueprint-spec)
+# Push this repo to GitHub, then in Render: New → Blueprint → pick the repo.
+services:
+  - type: web
+    name: zelero
+    runtime: python
+    plan: free
+    # Render free instances have an EPHEMERAL disk: codehelper.db resets on every
+    # deploy/restart. Attach a persistent disk (paid plans) and set ZELERO_DB_PATH
+    # to keep users, sessions, and chat history across deploys.
+    # disk:
+    #   name: zelero-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
+    buildCommand: pip install -r requirements.txt
+    # Production WSGI server — never use the Flask dev server in production.
+    startCommand: waitress-serve --host=0.0.0.0 --port=$PORT app:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.9"
+      # Render sits behind a reverse proxy. TRUST_PROXY=1 makes the app read
+      # the real client IP from X-Forwarded-For (Render overwrites this header
+      # at the edge), so the brute-force limiter no longer locks out ALL users
+      # when one IP fails a few logins.
+      - key: TRUST_PROXY
+        value: "1"
+      # Get it at https://console.groq.com/keys — set the real value in the
+      # Render dashboard; it is never stored in this file.
+      - key: GROQ_API_KEY
+        sync: false
+      # Session-signing key. Generate once with: python -c "import secrets; print(secrets.token_hex(32))"
+      # Setting it explicitly keeps users logged in across deploys (otherwise the
+      # ephemeral disk regenerates a fresh key each time).
+      - key: SECRET_KEY
+        sync: false
+      # Set only when a persistent disk is mounted (see above).
+      # - key: ZELERO_DB_PATH
+      #   value: /var/data/codehelper.db
+      # HTTPS-only session cookies (Render serves over HTTPS).
+      - key: SESSION_COOKIE_SECURE
+        value: "1"

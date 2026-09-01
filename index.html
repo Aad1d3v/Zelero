@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zelero</title>
+<script>try{var _s=JSON.parse(localStorage.getItem('ch_settings')||'{}');if(_s.theme)document.documentElement.dataset.theme=_s.theme}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='32' y2='32'%3E%3Cstop offset='0%25' stop-color='%231a7f5a'/%3E%3Cstop offset='100%25' stop-color='%2370e1b5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='16' y='20.5' text-anchor='middle' font-family='Inter,-apple-system,BlinkMacSystemFont,sans-serif' font-size='12' font-weight='700' fill='white'%3Ezelero%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#1a7f5a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafbfc; --surface: #ffffff; --surface-2: #f4f5f7; --surface-3: #ebedf0;
+  --border: #e2e5ea; --border-dark: #d1d5db;
+  --text: #1a1d23; --text-2: #4b5563; --text-3: #6b7280; --text-4: #9ca3af;
+  --accent: #1a7f5a; --accent-light: #e8f5ef; --accent-hover: #156b4a;
+  --mint: #70e1b5; --mint-bg: #f0fdf8; --mint-border: #c6f0de;
+  --on-accent: #ffffff; --accent-ring: rgba(26,127,90,0.1); --sel-ring: rgba(26,127,90,0.25);
+  --accent-soft: rgba(26,127,90,0.12); --accent-soft-b: rgba(26,127,90,0.25);
+  --glass: rgba(250,251,252,0.9); --glass-header: rgba(255,255,255,0.92);
+  --logo-a: #1a7f5a; --logo-b: #70e1b5;
+  --panel-a: #0f2419; --panel-b: #0a1a12;
+  --code-bg: #0f172a; --code-fg: #e2e8f0;
+  --err-bg: #fef2f2; --err-border: #fecaca; --err-fg: #dc2626;
+  --info-bg: #eff6ff; --info-fg: #2563eb; --warn-bg: #fff7ed; --warn-fg: #ea580c;
+  color-scheme: light;
+  --r: 12px; --r-lg: 20px; --r-sm: 8px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.08);
+  --tracking-tight: -0.025em;
+  --tracking-tighter: -0.035em;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.12em;
+}
+
+/* ---- THEMES (Settings → Appearance; default is Mint: green & white) ---- */
+[data-theme="midnight"] {
+  color-scheme: dark;
+  --bg:#0b0f14; --surface:#11161d; --surface-2:#171e27; --surface-3:#202935;
+  --border:#232c38; --border-dark:#2e3947;
+  --text:#e6eaf0; --text-2:#a6b1c0; --text-3:#8b95a3; --text-4:#5d6875;
+  --accent:#34d399; --accent-light:rgba(52,211,153,0.12); --accent-hover:#5ce3ae;
+  --mint:#34d399; --mint-bg:rgba(52,211,153,0.1); --mint-border:rgba(52,211,153,0.3);
+  --on-accent:#06281c; --accent-ring:rgba(52,211,153,0.16); --sel-ring:rgba(52,211,153,0.3);
+  --accent-soft:rgba(52,211,153,0.12); --accent-soft-b:rgba(52,211,153,0.3);
+  --glass:rgba(11,15,20,0.85); --glass-header:rgba(17,22,29,0.9);
+  --logo-a:#34d399; --logo-b:#10b981;
+  --panel-a:#0e141b; --panel-b:#090d12;
+  --code-bg:#0a0e13; --code-fg:#dbe4ee;
+  --err-bg:rgba(239,68,68,0.12); --err-border:rgba(239,68,68,0.35); --err-fg:#f87171;
+  --info-bg:rgba(59,130,246,0.12); --info-fg:#60a5fa; --warn-bg:rgba(249,115,22,0.12); --warn-fg:#fb923c;
+}
+[data-theme="midnight"] .hl-pre .tok-k { color:#5eead4; }
+[data-theme="midnight"] .hl-pre .tok-s { color:#fbbf24; }
+[data-theme="midnight"] .hl-pre .tok-c { color:#64748b; }
+[data-theme="midnight"] .hl-pre .tok-n { color:#93c5fd; }
+[data-theme="midnight"] .hl-pre .tok-t { color:#7dd3fc; }
+[data-theme="midnight"] .hl-pre .tok-f { color:#c4b5fd; }
+[data-theme="midnight"] .hl-pre .tok-p { color:#94a3b8; }
+[data-theme="midnight"] .lv-rookie { background:rgba(239,68,68,0.14); color:#f87171; border-color:rgba(239,68,68,0.3); }
+[data-theme="midnight"] .lv-beginner { background:rgba(245,158,11,0.14); color:#fbbf24; border-color:rgba(245,158,11,0.3); }
+[data-theme="midnight"] .lv-intermediate { background:rgba(234,179,8,0.14); color:#facc15; border-color:rgba(234,179,8,0.3); }
+[data-theme="midnight"] .lv-advanced { background:rgba(59,130,246,0.14); color:#60a5fa; border-color:rgba(59,130,246,0.3); }
+[data-theme="midnight"] .msg.user .msg-avatar { background:var(--surface-3); }
+[data-theme="ocean"] {
+  --bg:#f5f8fb; --surface:#ffffff; --surface-2:#eef3f8; --surface-3:#e2eaf2;
+  --border:#dce4ee; --border-dark:#c3d0de;
+  --text:#152232; --text-2:#3d5165; --text-3:#5a7086; --text-4:#8fa1b3;
+  --accent:#1d6fd1; --accent-light:#e8f1fc; --accent-hover:#175bb0;
+  --mint:#7cc0f5; --mint-bg:#eff6fd; --mint-border:#c9e2f8;
+  --on-accent:#ffffff; --accent-ring:rgba(29,111,209,0.12); --sel-ring:rgba(29,111,209,0.25);
+  --accent-soft:rgba(29,111,209,0.12); --accent-soft-b:rgba(29,111,209,0.25);
+  --glass:rgba(245,248,251,0.9); --glass-header:rgba(255,255,255,0.92);
+  --logo-a:#1d6fd1; --logo-b:#7cc0f5;
+  --panel-a:#0d2137; --panel-b:#0a1626;
+}
+[data-theme="grape"] {
+  --bg:#faf9fc; --surface:#ffffff; --surface-2:#f3f1f8; --surface-3:#e9e5f2;
+  --border:#e4dff0; --border-dark:#cfc6e4;
+  --text:#211d2e; --text-2:#4d4661; --text-3:#6b6380; --text-4:#a29bb5;
+  --accent:#6d3fc4; --accent-light:#f0eafc; --accent-hover:#5a32a6;
+  --mint:#c3a8f2; --mint-bg:#f6f2fd; --mint-border:#e0d3f6;
+  --on-accent:#ffffff; --accent-ring:rgba(109,63,196,0.12); --sel-ring:rgba(109,63,196,0.25);
+  --accent-soft:rgba(109,63,196,0.12); --accent-soft-b:rgba(109,63,196,0.25);
+  --glass:rgba(250,249,252,0.9); --glass-header:rgba(255,255,255,0.92);
+  --logo-a:#6d3fc4; --logo-b:#c3a8f2;
+  --panel-a:#241a3d; --panel-b:#170f29;
+}
+[data-theme="sunset"] {
+  --bg:#fdf9f4; --surface:#ffffff; --surface-2:#f7f0e8; --surface-3:#f0e6d9;
+  --border:#eee3d5; --border-dark:#ddceb9;
+  --text:#2b2118; --text-2:#5b4a39; --text-3:#7d6a55; --text-4:#b3a28d;
+  --accent:#c2661d; --accent-light:#fbeee2; --accent-hover:#a5540f;
+  --mint:#f5b06a; --mint-bg:#fdf4ea; --mint-border:#f6ddb9;
+  --on-accent:#ffffff; --accent-ring:rgba(194,102,29,0.12); --sel-ring:rgba(194,102,29,0.25);
+  --accent-soft:rgba(194,102,29,0.12); --accent-soft-b:rgba(194,102,29,0.25);
+  --glass:rgba(253,249,244,0.9); --glass-header:rgba(255,255,255,0.92);
+  --logo-a:#c2661d; --logo-b:#f5b06a;
+  --panel-a:#33200f; --panel-b:#1f1206;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+
+/* ---- LOGO COMPONENT ---- */
+.logo { display: grid; place-items: center; border-radius: 8px; background: linear-gradient(135deg, var(--logo-a), var(--logo-b)); color: var(--on-accent); font-weight: 700; flex-shrink: 0; }
+.logo svg { width: 60%; height: 60%; }
+
+/* ---- LANDING ---- */
+.landing { display: none; }
+.landing.active { display: block; }
+.l-topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: 100;
+  background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; max-width: 100%;
+}
+.l-brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; letter-spacing: var(--tracking-tight); }
+.tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 20px; background: var(--mint-bg); border: 1px solid var(--mint-border); font-size: 10.5px; font-weight: 600; color: var(--accent); letter-spacing: 0.02em; white-space: nowrap; }
+.tag-mono { font-family: var(--mono); font-size: 10px; }
+.tag-dark { background: var(--accent-soft); border-color: var(--accent-soft-b); }
+.brand-tags { display: flex; flex-direction: column; gap: 4px; }
+.brand-tag-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.l-nav { display: flex; align-items: center; gap: 28px; }
+.l-nav a { font-size: 13.5px; color: var(--text-2); font-weight: 500; letter-spacing: -0.01em; transition: color 0.15s; }
+.l-nav a:hover { color: var(--text); }
+.l-btn { display: inline-flex; align-items: center; justify-content: center; padding: 9px 20px; border-radius: var(--r-sm); font-size: 14px; font-weight: 600; font-family: var(--font); letter-spacing: -0.01em; cursor: pointer; transition: all 0.15s; border: none; }
+.l-btn-primary { background: var(--accent); color: var(--on-accent); }
+.l-btn-primary:hover { background: var(--accent-hover); }
+.l-btn-ghost { background: transparent; color: var(--text-2); border: 1px solid var(--border); }
+.l-btn-ghost:hover { background: var(--surface-2); color: var(--text); }
+.l-btn-lg { padding: 14px 28px; font-size: 15px; border-radius: var(--r); }
+
+/* Hero */
+.l-hero { padding: 160px 48px 100px; text-align: center; max-width: 800px; margin: 0 auto; box-sizing: border-box; }
+.l-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 20px; background: var(--mint-bg); border: 1px solid var(--mint-border); font-size: 11.5px; font-weight: 600; color: var(--accent); letter-spacing: 0.02em; margin-bottom: 28px; }
+.l-hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); }
+.l-hero h1 { font-size: clamp(40px, 6vw, 68px); font-weight: 800; letter-spacing: var(--tracking-tighter); line-height: 1.05; margin-bottom: 24px; color: var(--text); }
+.l-hero p { font-size: 18px; color: var(--text-2); line-height: 1.65; max-width: 560px; margin: 0 auto 36px; letter-spacing: -0.01em; }
+.l-hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* Logos */
+.l-logos { padding: 0 48px; margin-bottom: 100px; text-align: center; }
+.l-logos p { font-size: 12px; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 20px; }
+.l-logos-row { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.5; }
+.l-logos-row span { font-size: 15px; font-weight: 600; color: var(--text-3); letter-spacing: -0.01em; }
+
+/* Features */
+.l-features { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+.l-section-label { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: var(--tracking-wider); color: var(--accent); margin-bottom: 12px; }
+.l-section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: var(--tracking-tighter); line-height: 1.1; margin-bottom: 16px; }
+.l-section-sub { font-size: 16px; color: var(--text-2); line-height: 1.65; max-width: 560px; margin-bottom: 48px; letter-spacing: -0.005em; }
+.l-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.l-feature-card { padding: 32px 28px; border-radius: var(--r-lg); border: 1px solid var(--border); background: var(--surface); transition: box-shadow 0.2s, border-color 0.2s; }
+.l-feature-card:hover { box-shadow: var(--shadow-lg); border-color: var(--border-dark); }
+.l-feature-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--mint-bg); border: 1px solid var(--mint-border); display: grid; place-items: center; font-size: 20px; margin-bottom: 20px; color: var(--accent); }
+.l-feature-card h3 { font-size: 15px; font-weight: 650; margin-bottom: 8px; letter-spacing: var(--tracking-tight); }
+.l-feature-card p { font-size: 13.5px; color: var(--text-2); line-height: 1.6; letter-spacing: -0.005em; }
+
+/* How it works */
+.l-how { max-width: 900px; margin: 0 auto; padding: 0 48px 100px; }
+.l-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+.l-step { text-align: center; }
+.l-step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-size: 18px; font-weight: 700; margin: 0 auto 16px; }
+.l-step h3 { font-size: 15px; font-weight: 650; margin-bottom: 8px; letter-spacing: var(--tracking-tight); }
+.l-step p { font-size: 13.5px; color: var(--text-2); line-height: 1.6; letter-spacing: -0.005em; }
+
+/* Testimonial */
+.l-proof { max-width: 900px; margin: 0 auto; padding: 0 48px 100px; text-align: center; }
+.l-proof-card { padding: 48px; border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.l-proof-card blockquote { font-size: 20px; font-weight: 500; line-height: 1.55; color: var(--text); margin-bottom: 20px; font-style: italic; letter-spacing: -0.01em; }
+.l-proof-card cite { font-size: 13px; color: var(--text-3); font-style: normal; letter-spacing: -0.005em; }
+.l-proof-card cite strong { color: var(--text); font-weight: 600; }
+
+/* Pricing */
+.l-pricing { max-width: 1000px; margin: 0 auto; padding: 0 48px 100px; }
+.l-price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 48px; }
+.l-price-card { padding: 36px; border-radius: var(--r-lg); border: 1px solid var(--border); background: var(--surface); transition: box-shadow 0.2s; }
+.l-price-card.featured { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.l-price-card h3 { font-size: 17px; font-weight: 650; margin-bottom: 4px; letter-spacing: var(--tracking-tight); }
+.l-price-card .price { font-size: 34px; font-weight: 800; letter-spacing: var(--tracking-tighter); margin: 16px 0; }
+.l-price-card .price small { font-size: 15px; font-weight: 500; color: var(--text-3); }
+.l-price-card p { font-size: 13.5px; color: var(--text-2); line-height: 1.6; margin-bottom: 20px; letter-spacing: -0.005em; }
+.l-price-card ul { list-style: none; margin-bottom: 24px; }
+.l-price-card li { font-size: 13.5px; color: var(--text-2); padding: 6px 0; display: flex; align-items: center; gap: 8px; letter-spacing: -0.005em; }
+.l-price-card li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; background: var(--mint-bg); border: 1px solid var(--mint-border); display: inline-block; flex-shrink: 0; }
+.l-price-card .l-btn { width: 100%; }
+
+/* Footer */
+.l-footer { padding: 48px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-3); }
+.l-footer-links { display: flex; gap: 24px; }
+.l-footer-links a { color: var(--text-3); transition: color 0.15s; }
+.l-footer-links a:hover { color: var(--text); }
+
+/* ---- APP (after sign in) ---- */
+.app-shell { display: none; min-height: 100vh; }
+.app-shell.active { display: flex; }
+.app-bg { background: var(--bg); }
+.sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 220px; padding: 24px 14px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 200; transition: transform 0.25s ease; }
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 28px; }
+.brand-text { font-size: 14.5px; font-weight: 600; letter-spacing: var(--tracking-tight); }
+.nav { display: flex; flex-direction: column; gap: 2px; }
+.nav-btn { display: flex; align-items: center; padding: 10px 12px; border: none; background: transparent; color: var(--text-2); border-radius: var(--r-sm); font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.15s, color 0.15s; text-align: left; width: 100%; font-family: var(--font); letter-spacing: -0.01em; }
+.nav-btn:hover { background: var(--surface-2); color: var(--text); }
+.nav-btn.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.nav-sep { border-top: 1px solid var(--border); margin: 8px 0; }
+.sidebar-bottom { margin-top: auto; padding: 12px; border-top: 1px solid var(--border); }
+.account-row { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: var(--r-sm); min-width: 0; border: none; background: transparent; width: 100%; text-align: left; font-family: var(--font); cursor: pointer; transition: background 0.15s; }
+.account-row:hover { background: var(--surface-2); }
+.avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--logo-a), var(--logo-b)); display: grid; place-items: center; font-size: 11px; font-weight: 600; color: var(--on-accent); flex-shrink: 0; }
+.account-info { min-width: 0; overflow: hidden; }
+.account-info strong { display: block; font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.account-info small { display: block; color: var(--text-3); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Settings */
+.settings-layout { flex: 1; max-width: 660px; margin: 0 auto; padding: 40px 24px 60px; }
+.settings-head h2 { font-size: 26px; font-weight: 800; letter-spacing: var(--tracking-tighter); }
+.settings-head p { color: var(--text-2); font-size: 14px; margin: 6px 0 26px; }
+.settings-card { border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); padding: 20px; margin-bottom: 16px; }
+.settings-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; }
+.theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.theme-card { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface-2); cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; text-align: left; font-family: var(--font); }
+.theme-card:hover { border-color: var(--border-dark); }
+.theme-card.sel { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.theme-sw { display: flex; gap: 3px; flex-shrink: 0; }
+.theme-sw i { width: 13px; height: 28px; border-radius: 4px; }
+.theme-name { display: block; font-size: 13px; font-weight: 600; }
+.theme-sub { display: block; font-size: 11px; color: var(--text-3); margin-top: 1px; }
+.theme-check { margin-left: auto; color: var(--accent); font-weight: 700; visibility: hidden; }
+.theme-card.sel .theme-check { visibility: visible; }
+.set-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; flex-wrap: wrap; }
+.set-row + .set-row { border-top: 1px solid var(--border); }
+.set-row-title { font-size: 13px; font-weight: 600; }
+.set-row-desc { font-size: 11.5px; color: var(--text-3); margin-top: 2px; }
+.switch { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .track { position: absolute; inset: 0; border-radius: 20px; background: var(--surface-3); transition: background 0.15s; cursor: pointer; }
+.switch .track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: var(--shadow); transition: transform 0.15s; }
+.switch input:checked + .track { background: var(--accent); }
+.switch input:checked + .track::after { transform: translateX(18px); }
+.acct-mini { display: flex; align-items: center; gap: 12px; }
+.acct-mini .avatar { width: 38px; height: 38px; font-size: 14px; }
+.settings-foot { margin-top: 4px; }
+@media (max-width: 640px) { .theme-grid { grid-template-columns: 1fr; } }
+.signout-btn { display: block; width: 100%; margin-top: 8px; padding: 8px; border: none; border-radius: var(--r-sm); background: transparent; color: var(--text-3); font-size: 12px; font-weight: 500; font-family: var(--font); cursor: pointer; text-align: left; transition: background 0.15s, color 0.15s; }
+.signout-btn:hover { background: var(--surface-2); color: var(--text); }
+.mobile-header { display: none; position: fixed; top: 0; left: 0; right: 0; height: 54px; padding: 0 16px; background: var(--glass-header); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); z-index: 150; align-items: center; justify-content: space-between; }
+.mobile-brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; letter-spacing: var(--tracking-tight); }
+.hamburger { width: 36px; height: 36px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+.hamburger span { display: block; width: 20px; height: 1.5px; background: var(--text); border-radius: 1px; transition: all 0.2s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 190; }
+.main { flex: 1; margin-left: 220px; min-width: 0; }
+.page { display: none; min-height: 100vh; background: var(--bg); }
+.page.active { display: flex; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 9px 18px; border: none; border-radius: var(--r-sm); font-size: 13px; font-weight: 500; font-family: var(--font); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+.btn-sm { padding: 7px 14px; font-size: 12px; }
+.btn-lg { padding: 13px 26px; font-size: 15px; border-radius: var(--r); }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-ghost { background: transparent; color: var(--text-2); border: 1px solid var(--border); }
+.btn-ghost:hover { background: var(--surface-2); color: var(--text); }
+
+/* Ask AI */
+.ask-layout { flex: 1; display: grid; grid-template-columns: 1fr 280px; min-height: 100vh; }
+.chat-panel { display: flex; flex-direction: column; border-right: 1px solid var(--border); background: var(--surface); }
+.chat-header { padding: 14px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.chat-header h2 { font-size: 14px; font-weight: 600; letter-spacing: var(--tracking-tight); }
+.status-dot { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-3); }
+.chat-header-right { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.chat-header-right .tag { display: none; }
+@media (min-width: 481px) { .chat-header-right .tag { display: inline-flex; } }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.messages { flex: 1; padding: 22px; overflow-y: auto; }
+.msg { display: flex; gap: 10px; margin-bottom: 18px; }
+.msg.user { justify-content: flex-end; }
+.msg-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--logo-a), var(--logo-b)); display: grid; place-items: center; font-size: 10px; font-weight: 600; color: var(--on-accent); flex-shrink: 0; }
+.msg.user .msg-avatar { background: var(--surface-3); color: var(--text-2); }
+.msg-bubble { max-width: 500px; padding: 12px 16px; border-radius: 14px; font-size: 13.5px; line-height: 1.6; letter-spacing: -0.005em; overflow-wrap: anywhere; }
+.msg.ai .msg-bubble { background: var(--surface-2); color: var(--text); border-bottom-left-radius: 4px; }
+.msg.user .msg-bubble { background: var(--accent); color: var(--on-accent); border-bottom-right-radius: 4px; }
+.ai-rich { max-width: 560px; }
+.ai-rich br + br { display: none; }
+.ai-code { margin: 8px 0; padding: 12px 14px; background: var(--code-bg); color: var(--code-fg); border-radius: 8px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; overflow-x: auto; white-space: pre; }
+.ai-inline { font-family: var(--mono); font-size: 12px; background: var(--surface-3); padding: 1px 5px; border-radius: 4px; }
+.ai-h { display: block; font-size: 13.5px; font-weight: 700; margin: 10px 0 4px; letter-spacing: var(--tracking-tight); }
+.ai-li { margin: 2px 0; }
+.ai-rule { height: 1px; background: var(--border); margin: 10px 0; }
+.ai-tablerow { display: flex; gap: 8px; padding: 4px 0; font-size: 12.5px; line-height: 1.5; }
+.ai-cell-h { flex-shrink: 0; min-width: 70px; color: var(--accent); font-weight: 600; }
+.ai-cell { flex: 1; min-width: 0; color: var(--text-2); }
+.mistake-card { margin: 14px 0 4px; padding: 13px 15px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); }
+.mistake-title { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 9px; }
+.mistake-row { display: flex; align-items: flex-start; gap: 10px; padding: 4px 0; font-size: 12.5px; line-height: 1.5; }
+.mistake-pill { flex-shrink: 0; min-width: 96px; text-align: center; padding: 3px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.02em; margin-top: 1px; }
+.mistake-desc { flex: 1; min-width: 0; color: var(--text-2); }
+.lv-rookie { background: #fdecec; color: #c0392b; border: 1px solid #f5c6c2; }
+.lv-beginner { background: #fff3e6; color: #b45309; border: 1px solid #fcd9b0; }
+.lv-intermediate { background: #fef9e7; color: #92600a; border: 1px solid #f3e0a0; }
+.lv-advanced { background: #e8f1fb; color: #1d4ed8; border: 1px solid #c3dbf5; }
+.lv-expert { background: var(--mint-bg); color: var(--accent); border: 1px solid var(--mint-border); }
+.lv-generic { background: var(--surface-3); color: var(--text-2); border: 1px solid var(--border); }
+.chips { display: flex; gap: 6px; padding: 0 22px 14px; flex-wrap: wrap; }
+.chip { padding: 7px 13px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--text-2); font-size: 12.5px; font-family: var(--font); cursor: pointer; transition: all 0.15s; letter-spacing: -0.005em; }
+.chip:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+.composer { padding: 14px 22px; border-top: 1px solid var(--border); display: flex; align-items: flex-end; gap: 8px; }
+.composer-input { flex: 1; padding: 10px 14px; border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 13.5px; font-family: var(--font); outline: none; transition: border-color 0.15s; letter-spacing: -0.005em; resize: none; overflow-y: auto; min-height: 38px; max-height: 160px; line-height: 1.5; white-space: pre-wrap; }
+.composer-input:focus { border-color: var(--accent); }
+.composer-input::placeholder { color: var(--text-4); }
+.send-btn { width: 36px; height: 36px; border-radius: var(--r-sm); border: none; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; cursor: pointer; transition: background 0.15s; flex-shrink: 0; }
+.send-btn:hover { background: var(--accent-hover); }
+.ask-sidebar { padding: 22px 16px; background: var(--surface); }
+.guide-card { padding: 16px; border: 1px solid var(--border); border-radius: var(--r-sm); margin-bottom: 10px; background: var(--surface-2); }
+
+/* Code attach panel (Ask AI) */
+.code-panel { border-bottom: 1px solid var(--border); }
+.code-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 22px; }
+.code-panel-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+.code-panel-controls { display: flex; align-items: center; gap: 8px; }
+.sel-sm { min-width: 110px; padding: 5px 10px; font-size: 12px; }
+.code-clear { padding: 4px 10px; font-size: 11.5px; }
+.code-panel-body { display: flex; max-height: 260px; overflow: hidden; }
+.hl-wrap { position: relative; flex: 1; min-width: 0; }
+.hl-pre { position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding: 14px; overflow: auto; font-family: var(--mono); font-size: 13px; line-height: 1.7; color: var(--text); white-space: pre; }
+.hl-pre .tok-k { color: #0f766e; font-weight: 600; }
+.hl-pre .tok-s { color: #b45309; }
+.hl-pre .tok-c { color: #94a3b8; font-style: italic; }
+.hl-pre .tok-n { color: #2563eb; }
+.hl-pre .tok-f { color: #7c3aed; }
+.hl-pre .tok-t { color: #0369a1; }
+.hl-pre .tok-p { color: #475569; }
+.hl-input { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; color: transparent; -webkit-text-fill-color: transparent; caret-color: var(--text); background: transparent; overflow: auto; font-family: var(--mono); font-size: 13px; line-height: 1.7; white-space: pre; }
+.hl-input::selection { background: var(--sel-ring); -webkit-text-fill-color: transparent; }
+.hl-input::placeholder { color: var(--text-4); -webkit-text-fill-color: var(--text-4); }
+.code-panel-body .line-nums { padding-top: 13px; }
+.code-panel-body:empty { display: none; }
+.guide-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.guide-card p { font-size: 12.5px; color: var(--text-3); line-height: 1.5; letter-spacing: -0.005em; }
+
+/* Analyze */
+.analyze-layout { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 24px; }
+.editor-box, .results-box, .panel-box { border: 1px solid var(--border); border-radius: var(--r); background: var(--surface); overflow: hidden; }
+.box-head { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.box-head h3 { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+.box-head small { font-size: 11px; color: var(--text-3); }
+.code-area { display: flex; min-height: 320px; }
+.line-nums { padding: 14px 10px 14px 14px; text-align: right; color: var(--text-4); user-select: none; border-right: 1px solid var(--border); min-width: 40px; font-family: var(--mono); font-size: 12px; line-height: 1.8; }
+.code-input { flex: 1; padding: 14px; border: none; outline: none; background: transparent; color: var(--text); font-family: var(--mono); font-size: 13px; line-height: 1.8; resize: none; min-height: 320px; }
+.results-body { padding: 18px; }
+.result-item { padding: 14px; border: 1px solid var(--border); border-radius: var(--r-sm); margin-bottom: 10px; background: var(--surface-2); }
+.result-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 5px; letter-spacing: var(--tracking-tight); }
+.result-item p { font-size: 12.5px; color: var(--text-2); line-height: 1.55; letter-spacing: -0.005em; }
+.sev { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+.sev-ok { background: var(--accent-light); color: var(--accent); }
+.sev-info { background: var(--info-bg); color: var(--info-fg); }
+.sev-warn { background: var(--warn-bg); color: var(--warn-fg); }
+
+/* Convert */
+.convert-layout { flex: 1; padding: 24px; }
+.convert-bar { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.sel { padding: 9px 14px; border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 13px; font-family: var(--font); min-width: 140px; outline: none; }
+.sel:focus { border-color: var(--accent); }
+.arrow { color: var(--text-4); font-size: 16px; }
+.convert-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Contact */
+.contact-layout { flex: 1; max-width: 520px; margin: 0 auto; padding: 60px 24px; }
+.contact-layout h2 { font-size: 28px; font-weight: 800; letter-spacing: var(--tracking-tighter); margin-bottom: 8px; }
+.contact-sub { color: var(--text-2); font-size: 15px; margin-bottom: 32px; letter-spacing: -0.005em; line-height: 1.5; }
+.contact-card { display: flex; align-items: center; gap: 14px; padding: 18px; border: 1px solid var(--border); border-radius: var(--r); margin-bottom: 12px; background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s; }
+.contact-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+.contact-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-light); display: grid; place-items: center; color: var(--accent); font-size: 16px; flex-shrink: 0; font-family: var(--mono); font-weight: 600; }
+.contact-card strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 2px; letter-spacing: var(--tracking-tight); }
+.contact-card p { font-size: 12.5px; color: var(--text-3); margin: 0; letter-spacing: -0.005em; word-break: break-all; }
+.powered { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-3); }
+.powered strong { color: var(--text-2); font-weight: 500; }
+
+/* Auth (full page) */
+.auth-page { display: none; min-height: 100vh; background: var(--bg); }
+.auth-page.active { display: flex; }
+.auth-left { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px; position: relative; overflow: hidden; }
+.auth-left::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(112,225,181,0.12), transparent 70%); pointer-events: none; }
+.auth-left::after { content: ''; position: absolute; bottom: -150px; left: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(26,127,90,0.08), transparent 70%); pointer-events: none; }
+.auth-card { width: 100%; max-width: 380px; position: relative; z-index: 1; }
+.auth-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+.auth-logo .logo { width: 40px; height: 40px; border-radius: 10px; }
+.auth-logo span { font-size: 20px; font-weight: 700; letter-spacing: var(--tracking-tight); }
+.auth-card h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; letter-spacing: var(--tracking-tighter); line-height: 1.1; }
+.auth-card .sub { color: var(--text-2); font-size: 15px; margin-bottom: 32px; letter-spacing: -0.005em; line-height: 1.5; }
+.field-group { margin-bottom: 16px; }
+.field-label { display: block; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 8px; letter-spacing: -0.005em; }
+.field-input { width: 100%; padding: 12px 14px; border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 14px; font-family: var(--font); outline: none; transition: all 0.15s; }
+.field-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-ring); }
+.field-input::placeholder { color: var(--text-4); }
+.auth-btn { width: 100%; padding: 12px; margin-top: 8px; font-size: 14px; }
+.auth-error { padding: 10px 14px; border-radius: var(--r-sm); background: var(--err-bg); border: 1px solid var(--err-border); color: var(--err-fg); font-size: 13px; margin-bottom: 16px; display: none; }
+.auth-switch { text-align: center; margin-top: 24px; font-size: 14px; color: var(--text-3); }
+.auth-switch a { color: var(--accent); font-weight: 600; cursor: pointer; }
+.auth-switch a:hover { text-decoration: underline; }
+.auth-right { flex: 1; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--panel-a), var(--panel-b)); color: #fff; padding: 48px; position: relative; overflow: hidden; }
+.auth-right::before { content: ''; position: absolute; top: 20%; right: -10%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(112,225,181,0.15), transparent 60%); pointer-events: none; }
+.auth-right-content { position: relative; z-index: 1; max-width: 380px; }
+.auth-right h3 { font-size: 32px; font-weight: 800; letter-spacing: var(--tracking-tighter); margin-bottom: 16px; line-height: 1.1; }
+.auth-right p { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 32px; }
+.auth-features { display: grid; gap: 16px; }
+.auth-feature { display: flex; align-items: flex-start; gap: 12px; }
+.auth-feature-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(112,225,181,0.15); display: grid; place-items: center; font-size: 14px; flex-shrink: 0; color: var(--mint); }
+.auth-feature span { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+.auth-feature strong { display: block; color: #fff; margin-bottom: 2px; }
+@media (max-width: 900px) { .auth-right { display: none; } .auth-left { padding: 32px 24px; } }
+
+/* ---- First-sign-in onboarding ---- */
+.onboard { display: none; min-height: 100vh; background: var(--bg); align-items: center; justify-content: center; padding: 48px 24px; }
+.onboard.active { display: flex; }
+.onboard-card { max-width: 640px; width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 40px; }
+.onboard-logo { margin-bottom: 18px; }
+.onboard-card h1 { font-size: 26px; font-weight: 800; letter-spacing: var(--tracking-tighter); margin-bottom: 8px; }
+.onboard-sub { color: var(--text-2); font-size: 14px; line-height: 1.6; margin-bottom: 22px; }
+.onboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 26px; }
+.onboard-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--surface-2); }
+.onboard-icon { width: 30px; height: 30px; border-radius: 8px; background: var(--accent-light); color: var(--accent); display: grid; place-items: center; font-family: var(--mono); font-weight: 600; font-size: 13px; flex-shrink: 0; }
+.onboard-item strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.onboard-item span { display: block; font-size: 11.5px; color: var(--text-3); line-height: 1.5; }
+.onboard-hint { text-align: center; font-size: 11px; color: var(--text-4); margin-top: 12px; }
+@media (max-width: 640px) {
+  .onboard { padding: 24px 14px; }
+  .onboard-card { padding: 24px 18px; }
+  .onboard-grid { grid-template-columns: 1fr; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .mobile-header { display: flex; }
+  .overlay.open { display: block; }
+  .main { margin-left: 0; padding-top: 54px; }
+  .page { min-height: calc(100vh - 54px); }
+  .ask-layout { grid-template-columns: 1fr; }
+  .ask-sidebar { display: none; }
+  .analyze-layout { grid-template-columns: 1fr; }
+  .convert-panels { grid-template-columns: 1fr; }
+  .l-feature-grid { grid-template-columns: 1fr; }
+  .l-steps { grid-template-columns: 1fr; }
+  .l-price-grid { grid-template-columns: 1fr; }
+  .l-topbar { padding: 0 24px; }
+  .l-hero { padding: 120px 24px 60px; }
+  .l-features, .l-how, .l-proof, .l-pricing { padding-left: 24px; padding-right: 24px; }
+  .l-footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+@media (max-width: 640px) {
+  .l-logos-row { gap: 16px; }
+  .code-panel-head { padding: 10px 14px; }
+  .convert-bar { flex-wrap: wrap; }
+  .convert-bar .sel { min-width: 0; flex: 1; }
+  .settings-layout { padding: 24px 16px 40px; }
+  .l-hero h1 { font-size: 32px; }
+  .l-hero p { font-size: 16px; }
+  .l-hero-actions { flex-direction: column; align-items: center; }
+  .l-hero-actions .l-btn { width: 100%; max-width: 280px; }
+  .l-nav { display: none; }
+  .messages { padding: 16px; }
+  .chips { padding: 0 16px 10px; }
+  .composer { padding: 10px 16px; }
+  .analyze-layout { padding: 16px; gap: 12px; }
+  .convert-layout { padding: 16px; }
+  .contact-layout { padding: 40px 16px; }
+  .auth-card { padding: 28px 20px; margin: 16px; }
+  .code-area { min-height: 260px; }
+  .code-input { min-height: 260px; font-size: 12px; }
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<!-- SVG Logo Symbol (reused everywhere) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="logo-mark" viewBox="0 0 32 32">
+    <rect width="32" height="32" rx="8" fill="url(#logo-grad)"/>
+    <defs><linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32"><stop offset="0%" style="stop-color:var(--logo-a)"/><stop offset="100%" style="stop-color:var(--logo-b)"/></linearGradient></defs>
+    <text x="16" y="20.5" text-anchor="middle" font-family="Inter,-apple-system,sans-serif" font-size="12" font-weight="700" fill="currentColor">zelero</text>
+  </symbol>
+</svg>
+
+<!-- ========== LANDING PAGE ========== -->
+<div class="landing active" id="landing">
+  <header class="l-topbar">
+    <div class="l-brand">
+      <div class="logo" style="width:30px;height:30px;"><svg><use href="#logo-mark"/></svg></div>
+      <div class="brand-tags">
+        <span style="line-height:1.2;">Zelero</span>
+        <span class="tag tag-mono">Aadi-04 model</span>
+      </div>
+    </div>
+    <nav class="l-nav">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact-section">Contact</a>
+      <button class="l-btn l-btn-ghost" onclick="openAuth()">Sign in</button>
+      <button class="l-btn l-btn-primary" onclick="openAuth()">Get started</button>
+    </nav>
+  </header>
+
+  <section class="l-hero">
+    <div class="l-hero-eyebrow"><span></span>100% Free · AI-Powered Coding Assistant <span class="tag tag-dark">Made by Aadidev Prasanth</span></div>
+    <h1>Build better code.<br>Understand every line.</h1>
+    <p>Zelero helps you fix bugs, learn concepts, convert languages, and ship faster. Every feature is completely free — no credit card, no trials, no limits.</p>
+    <div class="l-hero-actions">
+      <button class="l-btn l-btn-primary l-btn-lg" onclick="openAuth()">Start for free</button>
+      <button class="l-btn l-btn-ghost l-btn-lg" onclick="openAuth()">See it in action</button>
+    </div>
+  </section>
+
+  <div class="l-logos">
+    <p>Trusted by developers everywhere</p>
+    <div class="l-logos-row">
+      <span>Python</span><span>JavaScript</span><span>TypeScript</span><span>Java</span><span>C++</span>
+    </div>
+  </div>
+
+  <section class="l-features" id="features">
+    <p class="l-section-label">Why Zelero</p>
+    <h2 class="l-section-title">Everything you need,<br>nothing you don't.</h2>
+    <p class="l-section-sub">Stop switching between tabs. Zelero understands your code, explains it, fixes it, and builds on top of it.</p>
+    <div class="l-feature-grid">
+      <div class="l-feature-card"><div class="l-feature-icon">></div><h3>Ask Anything</h3><p>Natural language. Get explanations, fixes, or build instructions instantly. No context switching.</p></div>
+      <div class="l-feature-card"><div class="l-feature-icon">/</div><h3>Analyze Code</h3><p>Detect syntax errors, bugs, bad practices, performance issues, and security problems in seconds.</p></div>
+      <div class="l-feature-card"><div class="l-feature-icon">&rarr;</div><h3>Convert Languages</h3><p>Translate code between Python, JavaScript, TypeScript, Java, and C++ with one click.</p></div>
+      <div class="l-feature-card"><div class="l-feature-icon">?</div><h3>Learn as You Go</h3><p>Every fix comes with an explanation. Understand what changed and why, not just the result.</p></div>
+      <div class="l-feature-card"><div class="l-feature-icon">!</div><h3>Don't Give Me The Answer</h3><p>Get progressive hints instead of solutions. Perfect for learning and building problem-solving skills.</p></div>
+      <div class="l-feature-card"><div class="l-feature-icon">*</div><h3>Build For Me</h3><p>Describe what you want. The AI plans, writes, tests, and iterates on the code automatically.</p></div>
+    </div>
+  </section>
+
+  <section class="l-how" id="how">
+    <p class="l-section-label">How it works</p>
+    <h2 class="l-section-title">Three steps to better code.</h2>
+    <p class="l-section-sub">No setup. No configuration. Just paste your code and ask.</p>
+    <div class="l-steps">
+      <div class="l-step"><div class="l-step-num">1</div><h3>Paste your code</h3><p>Drop in any snippet, function, or file. Zelero supports Python, JavaScript, TypeScript, Java, and C++.</p></div>
+      <div class="l-step"><div class="l-step-num">2</div><h3>Ask or select a tool</h3><p>Choose Fix, Explain, Analyze, Convert, or just ask in plain English what you need.</p></div>
+      <div class="l-step"><div class="l-step-num">3</div><h3>Get results instantly</h3><p>Receive clear, actionable output. Code, explanations, fixes, or conversions in seconds.</p></div>
+    </div>
+  </section>
+
+  <section class="l-proof">
+    <div class="l-proof-card">
+      <blockquote>"Zelero is what I wish existed when I was learning to code. It doesn't just give answers, it teaches you."</blockquote>
+      <cite><strong>Aadidev Prasanth</strong> &mdash; Made by Aadidev Prasanth</cite>
+    </div>
+  </section>
+
+  <section class="l-pricing" id="pricing">
+    <p class="l-section-label">Pricing</p>
+    <h2 class="l-section-title">100% Free. Every feature. No catches.</h2>
+    <p class="l-section-sub">No credit card. No trials. No hidden fees. Everything is free forever.</p>
+    <div class="l-price-grid" style="max-width:500px;">
+      <div class="l-price-card featured" style="border-color:var(--accent);">
+        <h3>Free</h3><div class="price">$0 <small>/forever</small></div><p>All features included. No limits. No upgrades.</p>
+        <ul><li>Unlimited AI chat</li><li>Unlimited code analysis</li><li>Unlimited error decoding</li><li>Unlimited debugging</li><li>Unlimited code conversion (5 languages)</li><li>Detailed explanations &amp; learning mode</li><li>"Don't Give Me The Answer" hints</li><li>Priority support</li></ul>
+        <button class="l-btn l-btn-primary l-btn-lg" onclick="openAuth()">Get started for free</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-pricing" id="contact-section" style="padding-bottom:60px;">
+    <p class="l-section-label">Contact</p>
+    <h2 class="l-section-title">Get in touch.</h2>
+    <p class="l-section-sub">Questions, feedback, or issues. We'd love to hear from you.</p>
+    <div style="max-width:500px;">
+      <a class="contact-card" href="mailto:aadidevprasanth12@yahoo.com"><div class="contact-icon">@</div><div><strong>Email</strong><p>aadidevprasanth12@yahoo.com</p></div></a>
+      <a class="contact-card" href="https://aadidev-com.onrender.com/" target="_blank" rel="noopener"><div class="contact-icon">/</div><div><strong>Website</strong><p>aadidev-com.onrender.com</p></div></a>
+    </div>
+  </section>
+
+  <footer class="l-footer">
+    <span>&copy; 2026 Zelero. Powered by <strong>Aadi-04</strong> &middot; Made by <strong>Aadidev Prasanth</strong></span>
+    <div class="l-footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+  </footer>
+</div>
+
+<!-- ========== AUTH OVERLAY ========== -->
+<section class="auth-page" id="authPage">
+  <div class="auth-left">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo"><svg><use href="#logo-mark"/></svg></div>
+        <span>Zelero</span>
+      </div>
+      <div id="authSignIn">
+        <h2>Welcome back</h2>
+        <p class="sub">Sign in to continue building with AI.</p>
+        <div class="auth-error" id="signInError"></div>
+        <div class="field-group">
+          <label class="field-label">Email</label>
+          <input class="field-input" type="email" placeholder="you@email.com" id="signInEmail">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Password</label>
+          <input class="field-input" type="password" placeholder="Enter your password" id="signInPass">
+        </div>
+        <button class="l-btn l-btn-primary auth-btn" onclick="doLogin()">Sign In</button>
+        <p class="auth-switch">Don't have an account? <a onclick="showSignUp()">Create one</a></p>
+      </div>
+      <div id="authSignUp" style="display:none;">
+        <h2>Create your account</h2>
+        <p class="sub">Start building better code in seconds.</p>
+        <div class="auth-error" id="signUpError"></div>
+        <div class="field-group">
+          <label class="field-label">Name</label>
+          <input class="field-input" type="text" placeholder="Your name" id="signUpName">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Email</label>
+          <input class="field-input" type="email" placeholder="you@email.com" id="signUpEmail">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Password</label>
+          <input class="field-input" type="password" placeholder="At least 6 characters" id="signUpPass">
+        </div>
+        <button class="l-btn l-btn-primary auth-btn" onclick="doRegister()">Create Account</button>
+        <p class="auth-switch">Already have an account? <a onclick="showSignIn()">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-right-content">
+      <h3>Build better code.<br>Understand every line.</h3>
+      <p>Join developers who use AI to write, fix, and learn code faster.</p>
+      <div class="auth-features">
+        <div class="auth-feature"><div class="auth-feature-icon">></div><div><strong>Ask Anything</strong><span>Natural language coding assistance</span></div></div>
+        <div class="auth-feature"><div class="auth-feature-icon">/</div><div><strong>Analyze & Debug</strong><span>Find and fix errors instantly</span></div></div>
+        <div class="auth-feature"><div class="auth-feature-icon">&rarr;</div><div><strong>Convert Languages</strong><span>Translate between 5 languages</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FIRST-SIGN-IN ONBOARDING ========== -->
+<section class="onboard" id="onboardPage">
+  <div class="onboard-card">
+    <div class="onboard-logo"><div class="logo" style="width:40px;height:40px;border-radius:10px;"><svg><use href="#logo-mark"/></svg></div></div>
+    <h1>Welcome to Zelero</h1>
+    <p class="onboard-sub">Your free AI coding assistant, powered by <strong>Aadi-04</strong> — made by Aadidev Prasanth. Paste code, ask anything, and get real explanations — not just answers.</p>
+    <div class="onboard-grid">
+      <div class="onboard-item"><div class="onboard-icon">&gt;</div><div><strong>Ask AI</strong><span>Chat about any code — get explanations, fixes, or a build plan in plain words.</span></div></div>
+      <div class="onboard-item"><div class="onboard-icon">/</div><div><strong>Analyze Code</strong><span>A line-by-line bug hunt that ends with a Mistake Level verdict.</span></div></div>
+      <div class="onboard-item"><div class="onboard-icon">?</div><div><strong>Error Codes</strong><span>Paste any error or traceback — get the cause, the line, and the fix.</span></div></div>
+      <div class="onboard-item"><div class="onboard-icon">!</div><div><strong>Debugging</strong><span>Match your code against real error output to find the exact bug.</span></div></div>
+      <div class="onboard-item"><div class="onboard-icon">&rarr;</div><div><strong>Converter</strong><span>Translate code between Python, JavaScript, TypeScript, Java, and C++.</span></div></div>
+      <div class="onboard-item"><div class="onboard-icon">*</div><div><strong>Made for you</strong><span>5 themes in Settings, your history saved to your account, and everything is 100% free.</span></div></div>
+    </div>
+    <button class="btn btn-primary btn-lg" id="onboardDone">Start using Zelero</button>
+    <p class="onboard-hint">You can change your theme and preferences anytime in Settings.</p>
+  </div>
+</section>
+
+<!-- ========== APP SHELL ========== -->
+<div class="app-shell" id="appShell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo" style="width:28px;height:28px;border-radius:7px;"><svg><use href="#logo-mark"/></svg></div>
+      <div class="brand-tags">
+        <div class="brand-text">Zelero</div>
+        <span class="tag tag-mono" style="font-size:9px;padding:2px 7px;">Aadi-04</span>
+      </div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active" data-page="ask">Ask AI</button>
+      <button class="nav-btn" data-page="analyze">Analyze Code</button>
+      <button class="nav-btn" data-page="errors">Error Codes</button>
+      <button class="nav-btn" data-page="debug">Debugging</button>
+      <button class="nav-btn" data-page="convert">Converter</button>
+      <div class="nav-sep"></div>
+      <button class="nav-btn" data-page="settings">Settings</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="account-row" onclick="goTo('settings')" title="Open Settings">
+        <div class="avatar">D</div>
+        <div class="account-info"><strong>Zelero</strong><small>Free plan</small></div>
+      </button>
+      <button class="signout-btn" onclick="signOut()">Sign out</button>
+    </div>
+  </aside>
+  <header class="mobile-header" id="mobileHeader">
+    <button class="hamburger" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="mobile-brand">
+      <div class="logo" style="width:24px;height:24px;border-radius:6px;"><svg><use href="#logo-mark"/></svg></div>
+      <span>Zelero</span>
+      <span class="tag tag-mono" style="font-size:9px;padding:2px 7px;">Aadi-04</span>
+    </div>
+    <button class="btn btn-primary btn-sm" data-page="ask">Ask AI</button>
+  </header>
+  <div class="overlay" id="overlay"></div>
+  <main class="main">
+    <section class="page active" id="ask">
+      <div class="ask-layout">
+        <div class="chat-panel">
+          <div class="chat-header"><h2>Ask Zelero</h2><div class="chat-header-right"><div class="status-dot"><span class="dot"></span>Aadi-04</div><span class="tag tag-mono">Made by Aadidev Prasanth</span></div></div>
+          <div class="code-panel" id="codePanel">
+            <div class="code-panel-head">
+              <span class="code-panel-title">Attach code</span>
+              <div class="code-panel-controls">
+                <select class="sel sel-sm" id="chatLang">
+                  <option value="python">Python</option>
+                  <option value="javascript">JavaScript</option>
+                  <option value="typescript">TypeScript</option>
+                  <option value="java">Java</option>
+                  <option value="cpp">C++</option>
+                </select>
+                <button class="chip code-clear" id="codeClear">Clear</button>
+              </div>
+            </div>
+            <div class="code-panel-body" id="codeBody">
+              <div class="line-nums" id="chatLines">1</div>
+              <div class="hl-wrap">
+                <pre class="hl-pre" id="chatHl" aria-hidden="true"></pre>
+                <textarea class="code-input hl-input" id="chatCode" spellcheck="false" placeholder="Paste your code here — it will be formatted and highlighted automatically. Then ask Aadi-04 anything about it."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="messages" id="messages">
+            <div class="msg ai"><div class="msg-avatar"><svg width="16" height="16"><use href="#logo-mark"/></svg></div><div class="msg-bubble">What can I help you with? I can explain code, fix bugs, build features, or convert between languages.</div></div>
+          </div>
+          <div class="chips" id="chips">
+            <button class="chip">Explain this code</button>
+            <button class="chip">Fix my bug</button>
+            <button class="chip">Build a feature</button>
+            <button class="chip">Convert to JS</button>
+          </div>
+          <div class="composer">
+            <textarea class="composer-input" id="prompt" placeholder="Ask anything... type here or paste code. Shift+Enter for a new line." autocomplete="off" rows="1"></textarea>
+            <button class="send-btn" id="sendBtn" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+          </div>
+        </div>
+        <div class="ask-sidebar">
+          <div class="guide-card"><div class="guide-label">Help</div><p>Ask questions and get clear explanations.</p></div>
+          <div class="guide-card"><div class="guide-label">Build</div><p>Say what you want and the AI writes the code.</p></div>
+          <div class="guide-card"><div class="guide-label">Fix</div><p>Paste broken code and get it repaired.</p></div>
+          <div class="guide-card"><div class="guide-label">Model</div><p style="display:flex;flex-direction:column;gap:6px;"><code style="color:var(--accent);font-family:var(--mono);font-size:11px;">Aadi-04</code><span class="tag tag-mono" style="align-self:flex-start;">Made by Aadidev Prasanth</span></p></div>
+        </div>
+      </div>
+    </section>
+    <section class="page" id="analyze">
+      <div class="analyze-layout">
+        <div class="editor-box">
+          <div class="box-head"><h3>Source Code</h3><button class="btn btn-primary btn-sm" id="analyzeBtn">Analyze</button></div>
+          <div class="code-area"><div class="line-nums" id="lineNums"></div><textarea class="code-input" id="editor" spellcheck="false">def greet(name):
+    message = "Hello, " + name
+    print(message)
+
+greet("Aadi")</textarea></div>
+        </div>
+        <div class="results-box">
+          <div class="box-head"><h3>Results</h3></div>
+          <div class="results-body" id="resultsBody">
+            <div class="result-item"><span class="sev sev-ok">Ready</span><h4>No issues found</h4><p>Code looks clean. Run analyze for a deeper check.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="page" id="errors">
+      <div class="analyze-layout">
+        <div class="editor-box">
+          <div class="box-head"><h3>Error Output</h3><button class="btn btn-primary btn-sm" id="errorBtn">Analyze Error</button></div>
+          <div class="code-area"><div class="line-nums" id="errorLines"></div><textarea class="code-input" id="errorInput" spellcheck="false" placeholder="Paste your error message here...
+
+Example:
+Traceback (most recent call last):
+  File \"main.py\", line 5, in <module>
+    result = 10 / 0
+ZeroDivisionError: division by zero"></textarea></div>
+        </div>
+        <div class="results-box">
+          <div class="box-head"><h3>Explanation</h3></div>
+          <div class="results-body" id="errorResults">
+            <div class="result-item"><span class="sev sev-info">Ready</span><h4>Paste an error to get started</h4><p>Zelero will explain what the error means, why it happened, and how to fix it.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="page" id="debug">
+      <div class="analyze-layout">
+        <div class="editor-box">
+          <div class="box-head"><h3>Code + Error</h3><button class="btn btn-primary btn-sm" id="debugBtn">Debug</button></div>
+          <div style="display:flex;flex-direction:column;min-height:420px;">
+            <div style="padding:8px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+              <span style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);">Code</span>
+            </div>
+            <div class="code-area" style="flex:1;min-height:160px;"><div class="line-nums" id="debugCodeLines"></div><textarea class="code-input" id="debugCode" spellcheck="false" style="min-height:160px;">def divide(a, b):
+    return a / b
+
+result = divide(10, 0)
+print(result)</textarea></div>
+            <div style="padding:8px 16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+              <span style="font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);">Error Output</span>
+            </div>
+            <div class="code-area" style="flex:1;min-height:120px;"><div class="line-nums" id="debugErrLines"></div><textarea class="code-input" id="debugError" spellcheck="false" style="min-height:120px;background:var(--err-bg);" placeholder="Paste the error output from your terminal..."></textarea></div>
+          </div>
+        </div>
+        <div class="results-box">
+          <div class="box-head"><h3>Debug Report</h3></div>
+          <div class="results-body" id="debugResults">
+            <div class="result-item"><span class="sev sev-info">Ready</span><h4>Paste code and error output</h4><p>Zelero will locate the problem, explain the cause, and provide a fix.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="page" id="convert">
+      <div class="convert-layout">
+        <div class="convert-bar">
+          <select class="sel" id="fromLang"><option>Python</option><option>JavaScript</option><option>TypeScript</option><option>Java</option><option>C++</option></select>
+          <span class="arrow">&rarr;</span>
+          <select class="sel" id="toLang"><option>JavaScript</option><option>Python</option><option>TypeScript</option><option>Java</option><option>C++</option></select>
+          <button class="btn btn-primary btn-sm" id="convertBtn">Convert</button>
+        </div>
+        <div class="convert-panels">
+          <div class="panel-box"><div class="box-head"><h3>Source</h3><small id="fromLabel">Python</small></div><div class="code-area"><div class="line-nums" id="srcLines"></div><textarea class="code-input" id="srcCode" spellcheck="false">def greet(name):
+    return "Hello, " + name</textarea></div></div>
+          <div class="panel-box"><div class="box-head"><h3>Output</h3><small id="toLabel">JavaScript</small></div><div class="code-area"><div class="line-nums" id="outLines"></div><textarea class="code-input" id="outCode" readonly spellcheck="false">// Converted code appears here.</textarea></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="page" id="contact">
+      <div class="contact-layout">
+        <h2>Get in Touch</h2>
+        <p class="contact-sub">Questions, feedback, or issues. Reach out anytime.</p>
+        <a class="contact-card" href="mailto:aadidevprasanth12@yahoo.com"><div class="contact-icon">@</div><div><strong>Email</strong><p>aadidevprasanth12@yahoo.com</p></div></a>
+        <a class="contact-card" href="https://aadidev-com.onrender.com/" target="_blank" rel="noopener"><div class="contact-icon">/</div><div><strong>Website</strong><p>aadidev-com.onrender.com</p></div></a>
+        <p class="powered">Powered by <strong>Aadi-04</strong> &middot; Made by <strong>Aadidev Prasanth</strong></p>
+      </div>
+    </section>
+    <section class="page" id="settings">
+      <div class="settings-layout">
+        <div class="settings-head">
+          <h2>Settings</h2>
+          <p>Personalize Zelero. Changes apply instantly and are saved on this device.</p>
+        </div>
+        <div class="settings-card">
+          <div class="settings-label">Appearance</div>
+          <div class="theme-grid" id="themeGrid"></div>
+        </div>
+        <div class="settings-card">
+          <div class="settings-label">Chat preferences</div>
+          <div class="set-row">
+            <div><div class="set-row-title">Default code language</div><div class="set-row-desc">Pre-selected in the Ask AI code panel.</div></div>
+            <select class="sel" id="setLang" style="min-width:150px;">
+              <option value="python">Python</option>
+              <option value="javascript">JavaScript</option>
+              <option value="typescript">TypeScript</option>
+              <option value="java">Java</option>
+              <option value="cpp">C++</option>
+            </select>
+          </div>
+          <div class="set-row">
+            <div><div class="set-row-title">Save conversations</div><div class="set-row-desc">Keep your chats, analyses, and conversions in your history.</div></div>
+            <label class="switch"><input type="checkbox" id="setAutoSave" checked><span class="track"></span></label>
+          </div>
+        </div>
+        <div class="settings-card">
+          <div class="settings-label">Account</div>
+          <div class="acct-mini">
+            <div class="avatar">D</div>
+            <div class="account-info"><strong id="settingsName">Not signed in</strong><small id="settingsEmail">—</small></div>
+          </div>
+        </div>
+        <div class="settings-foot">
+          <button class="btn btn-ghost" onclick="resetSettings()">Reset to defaults</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+function openAuth(){document.getElementById('landing').classList.remove('active');document.getElementById('authPage').classList.add('active');showSignIn()}
+// First-sign-in onboarding: shown when the account hasn't completed the intro yet.
+function enterApp(){document.getElementById('landing').classList.remove('active');document.getElementById('authPage').classList.remove('active');document.getElementById('onboardPage').classList.remove('active');document.getElementById('appShell').classList.add('active');window.scrollTo(0,0)}
+function showOnboard(){document.getElementById('landing').classList.remove('active');document.getElementById('authPage').classList.remove('active');document.getElementById('appShell').classList.remove('active');document.getElementById('onboardPage').classList.add('active');window.scrollTo(0,0)}
+document.getElementById('onboardDone').addEventListener('click',async function(){try{await fetch('/api/auth/intro-seen',{method:'POST'})}catch(e){}enterApp()})
+function closeAuth(){document.getElementById('authPage').classList.remove('active');document.getElementById('landing').classList.add('active')}
+function showSignIn(){document.getElementById('authSignIn').style.display='block';document.getElementById('authSignUp').style.display='none';clearAuthErrors()}
+function showSignUp(){document.getElementById('authSignIn').style.display='none';document.getElementById('authSignUp').style.display='block';clearAuthErrors()}
+function clearAuthErrors(){document.querySelectorAll('.auth-error').forEach(e=>{e.style.display='none';e.textContent=''})}
+function showError(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block'}
+const VALID_DOMAINS=['gmail.com','yahoo.com','yahoo.co.uk','yahoo.ca','yahoo.com.au','hotmail.com','hotmail.co.uk','outlook.com','outlook.co.uk','live.com','live.co.uk','msn.com','icloud.com','me.com','mac.com','aol.com','protonmail.com','proton.me','zoho.com','yandex.com','mail.com','fastmail.com','gmx.com','tutanota.com','hey.com','pm.me'];
+function isValidEmail(email){if(!email||!email.includes('@'))return'Please enter a valid email address';const domain=email.split('@')[1]?.toLowerCase();if(!domain||!domain.includes('.'))return'Please enter a valid email address';if(!VALID_DOMAINS.includes(domain))return'Please use Gmail, Yahoo, Outlook, or another real email provider';return null}
+async function doLogin(){const email=document.getElementById('signInEmail').value.trim();const pass=document.getElementById('signInPass').value;if(!email||!pass){showError('signInError','Please fill in all fields');return}const emailErr=isValidEmail(email);if(emailErr){showError('signInError',emailErr);return}try{const res=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});const data=await res.json();if(data.success){updateUserUI(data.user);if(data.user&&data.user.introSeen===false){showOnboard()}else{enterApp()}}else{showError('signInError',data.error||'Login failed')}}catch(e){showError('signInError','Connection failed. Is the server running?')}}
+async function doRegister(){const name=document.getElementById('signUpName').value.trim();const email=document.getElementById('signUpEmail').value.trim();const pass=document.getElementById('signUpPass').value;if(!name){showError('signUpError','Please enter your name');return}if(!email){showError('signUpError','Please enter your email');return}if(!pass){showError('signUpError','Please enter a password');return}const emailErr=isValidEmail(email);if(emailErr){showError('signUpError',emailErr);return}if(pass.length<6){showError('signUpError','Password must be at least 6 characters');return}if(pass.length>128){showError('signUpError','Password is too long');return}try{const res=await fetch('/api/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password:pass})});const data=await res.json();if(data.success){updateUserUI(data.user);if(data.user&&data.user.introSeen===false){showOnboard()}else{enterApp()}}else{showError('signUpError',data.error||'Registration failed')}}catch(e){showError('signUpError','Connection failed. Is the server running?')}}
+async function doLogout(){try{await fetch('/api/auth/logout',{method:'POST'})}catch(e){}document.getElementById('appShell').classList.remove('active');document.getElementById('landing').classList.add('active');window.scrollTo(0,0)}
+function signOut(){doLogout()}
+function updateUserUI(user){const name=user.name||user.email.split('@')[0];const initial=name.charAt(0).toUpperCase();document.querySelectorAll('.avatar').forEach(a=>a.textContent=initial);document.querySelectorAll('.account-info strong').forEach(s=>s.textContent=name);document.querySelectorAll('.account-info small').forEach(s=>s.textContent=user.email)}
+async function checkSession(){try{const res=await fetch('/api/auth/me');const data=await res.json();if(data.loggedIn){updateUserUI(data.user);if(data.user.introSeen===false){showOnboard()}else{enterApp()}}}catch(e){}}
+checkSession();
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.page;if(p==='landing'){signOut();return}document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===p));closeMenu()}));
+const sidebar=document.getElementById('sidebar'),overlay=document.getElementById('overlay'),menuToggle=document.getElementById('menuToggle');
+function openMenu(){sidebar.classList.add('open');overlay.classList.add('open');menuToggle.classList.add('open')}
+function closeMenu(){sidebar.classList.remove('open');overlay.classList.remove('open');menuToggle.classList.remove('open')}
+if(menuToggle)menuToggle.addEventListener('click',()=>{sidebar.classList.contains('open')?closeMenu():openMenu()});
+if(overlay)overlay.addEventListener('click',closeMenu);
+const messagesEl=document.getElementById('messages'),promptEl=document.getElementById('prompt'),chipsEl=document.getElementById('chips');
+function escHtml(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+
+// ---- CODE HIGHLIGHTING (chat code panel) ----
+const chatCode=document.getElementById('chatCode'),chatHl=document.getElementById('chatHl'),chatLines=document.getElementById('chatLines'),chatLang=document.getElementById('chatLang');
+const KW={python:['def','return','if','elif','else','for','while','in','not','and','or','import','from','as','class','try','except','finally','with','lambda','pass','break','continue','yield','global','nonlocal','assert','raise','del','None','True','False','is'],javascript:['function','return','if','else','for','while','const','let','var','import','export','from','class','try','catch','finally','new','this','typeof','instanceof','in','of','async','await','yield','switch','case','break','continue','default','null','undefined','true','false','throw','do','delete','void','static','extends','super'],typescript:['function','return','if','else','for','while','const','let','var','import','export','from','class','interface','type','enum','try','catch','finally','new','this','typeof','instanceof','in','of','async','await','yield','switch','case','break','continue','default','null','undefined','true','false','throw','do','delete','void','static','extends','super','implements','public','private','protected','readonly','declare','namespace','abstract','as','keyof','infer'],java:['public','private','protected','class','interface','enum','extends','implements','static','final','void','int','boolean','String','double','float','long','short','byte','char','return','if','else','for','while','do','switch','case','break','continue','default','new','try','catch','finally','throw','throws','import','package','this','super','null','true','false','abstract','synchronized','volatile','var'],cpp:['public','private','protected','class','struct','enum','namespace','using','template','typename','virtual','override','const','static','inline','return','if','else','for','while','do','switch','case','break','continue','default','new','delete','try','catch','throw','this','nullptr','true','false','int','double','float','long','short','char','bool','void','auto','extern','friend','operator','sizeof','typedef','union','unsigned']};
+function hlToken(tok,lang,prev){const kws=KW[lang]||KW.python;if(/^(\/\/|\/\*)/.test(tok)||(lang==='python'&&/^#/.test(tok)))return 'tok-c';if(/^["']/.test(tok))return 'tok-s';if(/^\d/.test(tok))return 'tok-n';if(kws.indexOf(tok)>-1)return 'tok-k';if(/^[A-Z][a-zA-Z]*$/.test(tok))return 'tok-t';return ''}
+function highlightCode(src,lang){if(!src)return '';const esc=escHtml;
+// `#` line comments only exist in Python — matching them for every language
+// wrongly colored things like JS private fields (this.#x) as comments.
+const comment=lang==='python'?'|#[^\\n]*':'';
+const parts=src.split(new RegExp('(\\/\\/.*$'+comment+'|\\/\\*[\\s\\S]*?\\*\\/|"[^"\\n]*"|\'[^\'\\n]*\'|\\b\\d+\\b|\\b[A-Za-z_]\\w*\\b)','gm'));
+return parts.map(p=>{if(!p)return p;const cls=hlToken(p,lang);return cls?'<span class="'+cls+'">'+esc(p)+'</span>':esc(p)}).join('')}
+function renderHl(){chatHl.innerHTML=highlightCode(chatCode.value,chatLang.value);syncChatLines()}
+function syncChatLines(){const n=chatCode.value.split('\n').length;chatLines.innerHTML=Array.from({length:n},(_,i)=>i+1).join('<br>')}
+function formatPasted(raw){return raw.replace(/\r\n?/g,'\n')}
+function insertAtCursor(ta,text){const s=ta.selectionStart,e=ta.selectionEnd;ta.value=ta.value.slice(0,s)+text+ta.value.slice(e);ta.selectionStart=ta.selectionEnd=s+text.length}
+chatCode.addEventListener('input',renderHl);
+chatCode.addEventListener('paste',e=>{e.preventDefault();const txt=(e.clipboardData||window.clipboardData).getData('text/plain');insertAtCursor(chatCode,formatPasted(txt));renderHl()});
+chatCode.addEventListener('drop',e=>{e.preventDefault();const file=e.dataTransfer&&e.dataTransfer.files[0];if(file){const r=new FileReader();r.onload=()=>{insertAtCursor(chatCode,formatPasted(String(r.result)));renderHl()};r.readAsText(file)}});
+chatCode.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();insertAtCursor(chatCode,'  ');renderHl()}});
+chatHl.addEventListener('scroll',()=>{chatCode.scrollTop=chatHl.scrollTop;chatCode.scrollLeft=chatHl.scrollLeft});
+chatCode.addEventListener('scroll',()=>{chatHl.scrollTop=chatCode.scrollTop;chatHl.scrollLeft=chatCode.scrollLeft;chatLines.scrollTop=chatCode.scrollTop});
+chatLang.addEventListener('change',renderHl);
+document.getElementById('codeClear').addEventListener('click',()=>{chatCode.value='';renderHl();chatCode.focus()});
+renderHl();
+
+function addMsg(text,isUser){const cls=isUser?'user':'ai',div=document.createElement('div');div.className='msg '+cls;const avatarContent=isUser?'Y':'<svg width="16" height="16"><use href="#logo-mark"/></svg>';div.innerHTML='<div class="msg-avatar">'+avatarContent+'</div><div class="msg-bubble">'+escHtml(text)+'</div>';messagesEl.appendChild(div);messagesEl.scrollTop=messagesEl.scrollHeight}
+function mistakeMeta(lvl){const t=lvl.toLowerCase().replace(/[^a-z ]/g,'');if(/even (pros?|masters?|seniors?|experts?|veterans?|developers?|engineers?)|expert|seasoned/.test(t))return {cls:'lv-expert',label:'Even pros'};if(/advanced|senior|experienced|professional/.test(t))return {cls:'lv-advanced',label:'Advanced'};if(/intermediate|mid[- ]level/.test(t))return {cls:'lv-intermediate',label:'Intermediate'};if(/beginner|novice|fundamental|basic/.test(t))return {cls:'lv-beginner',label:'Beginner'};if(/rookie|newbie|first[- ]time/.test(t))return {cls:'lv-rookie',label:'Rookie'};return {cls:'lv-generic',label:lvl.replace(/[*]/g,'').trim()}}
+function renderAI(text){let levelsHtml='';const sec=text.match(/(^|\n)#{1,3}[ \t]*Mistake[ \t]*Levels?[ \t]*:?[^\n]*\n([\s\S]*?)(?=\n#{1,3}[ \t]|$)/i);if(sec){const items=[];const re=/^[-*]\s*\*{1,2}([^*]+?)\*{1,2}\s*[-–—:]\s*(.+)$/gm;let m;while((m=re.exec(sec[2]))!==null)items.push({lvl:m[1].trim(),desc:m[2].trim()});if(!items.length){const re2=/^[-*]\s*(.+?)\s*[-–—:]\s*\*{1,2}([^*]+?)\*{1,2}$/gm;while((m=re2.exec(sec[2]))!==null)items.push({lvl:m[2].trim(),desc:m[1].trim()})}if(items.length){levelsHtml='<div class="mistake-card"><div class="mistake-title">Mistake Level</div>'+items.map(it=>{const meta=mistakeMeta(it.lvl);return '<div class="mistake-row"><span class="mistake-pill '+meta.cls+'">'+escHtml(meta.label)+'</span><span class="mistake-desc">'+escHtml(it.desc)+'</span></div>'}).join('')+'</div>';text=text.replace(sec[0],'')}}
+const esc=escHtml(text);let out='';const blocks=esc.split(/```[a-zA-Z0-9+_-]*\n?/);for(let i=0;i<blocks.length;i++){if(i%2===1){out+='<pre class="ai-code">'+blocks[i].replace(/\n$/, '')+'</pre>'}else{out+=blocks[i].replace(/`([^`\n]+)`/g,'<code class="ai-inline">$1</code>').replace(/^#{1,6} (.+)$/gm,'<strong class="ai-h">$1</strong>').replace(/^\s*-{3,}\s*$/gm,'').replace(/^[-*] (.+)$/gm,'<div class="ai-li">• $1</div>').replace(/^\d+\. (.+)$/gm,'<div class="ai-li">$1</div>').replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>').replace(/^\|(.+)\|$/gm,(m,row)=>{if(/^[\s|:-]+$/.test(row))return '';const cells=row.split('|').filter(c=>c.trim()!=='').map(c=>c.trim());if(cells.length<=1)return '';const first=cells.shift();return '<div class="ai-tablerow"><strong class="ai-cell-h">'+first+'</strong><div class="ai-cell">'+cells.join(' — ')+'</div></div>'}).replace(/\n/g,'<br>')}}return out+levelsHtml}
+async function aiAsk(body,retries=3){let last='';for(let i=0;i<=retries;i++){try{const res=await fetch('/api/ai/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await res.json();if(data.reply)return {ok:true,reply:data.reply};last=data.error||'No response from Aadi-04';if(res.status>=400&&res.status<500&&res.status!==429)return {ok:false,error:last};if(i<retries)await new Promise(r=>setTimeout(r,2500*(i+1)))}catch(e){last='Connection failed — is the server running?';if(i<retries)await new Promise(r=>setTimeout(r,2500*(i+1)))}}return {ok:false,error:last}}
+function saveConv(tool,input,output){if(!S.autoSave)return;try{fetch('/api/conversations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tool,input,output})}).catch(()=>{})}catch(e){}}
+let sending=false;
+async function send(){if(sending)return;const val=promptEl.value.trim();const code=chatCode.value.trim();if(!val&&!code)return;sending=true;const lang=chatLang.value;addMsg(val||'Analyze this code',true);if(code)addMsg('[Code attached — '+lang+']',true);promptEl.value='';promptEl.style.height='auto';if(chipsEl)chipsEl.style.display='none';const thinking=document.createElement('div');thinking.className='msg ai';thinking.innerHTML='<div class="msg-avatar"><svg width="16" height="16"><use href="#logo-mark"/></svg></div><div class="msg-bubble" id="thinking">Aadi-04 is thinking...</div>';messagesEl.appendChild(thinking);messagesEl.scrollTop=messagesEl.scrollHeight;let res;try{res=await aiAsk({prompt:val,code,lang})}finally{sending=false}thinking.remove();if(res.ok){saveConv('chat',val||('[code attached — '+lang+']'),res.reply);const div=document.createElement('div');div.className='msg ai';div.innerHTML='<div class="msg-avatar"><svg width="16" height="16"><use href="#logo-mark"/></svg></div><div class="msg-bubble ai-rich">'+renderAI(res.reply)+'</div>';messagesEl.appendChild(div)}else{addMsg('Sorry — '+res.error,false)}messagesEl.scrollTop=messagesEl.scrollHeight}
+document.getElementById('sendBtn').addEventListener('click',send);
+function autoGrow(){promptEl.style.height='auto';promptEl.style.height=Math.min(promptEl.scrollHeight,160)+'px'}
+promptEl.addEventListener('input',autoGrow);
+promptEl.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{promptEl.value=c.textContent;send()}));
+function syncLines(textarea,numsEl){const n=textarea.value.split('\n').length;numsEl.innerHTML=Array.from({length:n},(_,i)=>i+1).join('<br>')}
+const editor=document.getElementById('editor'),lineNums=document.getElementById('lineNums');
+if(editor&&lineNums){syncLines(editor,lineNums);editor.addEventListener('input',()=>syncLines(editor,lineNums))}
+const srcCode=document.getElementById('srcCode'),srcLines=document.getElementById('srcLines');
+if(srcCode&&srcLines){syncLines(srcCode,srcLines);srcCode.addEventListener('input',()=>syncLines(srcCode,srcLines))}
+document.getElementById('analyzeBtn').addEventListener('click',async function(){const val=editor.value.trim();if(!val)return;this.textContent='Analyzing...';this.disabled=true;const btn=this;const resultsBody=document.getElementById('resultsBody');resultsBody.innerHTML='<div class="result-item"><span class="sev sev-info">Working</span><h4>Aadi-04 is analyzing...</h4><p>Checking syntax, logic, and best practices line by line.</p></div>';const res=await aiAsk({prompt:'',code:val,lang:'python',mode:'analyze'});if(res.ok){saveConv('analyze',val,res.reply);resultsBody.innerHTML='<div class="ai-rich">'+renderAI(res.reply)+'</div>'}else{resultsBody.innerHTML='<div class="result-item"><span class="sev sev-warn">Error</span><h4>Analysis failed</h4><p>'+escHtml(res.error)+'</p></div>'}btn.textContent='Analyze';btn.disabled=false});
+// Error analysis
+const errorInput=document.getElementById('errorInput'),errorLines=document.getElementById('errorLines');
+if(errorInput&&errorLines){syncLines(errorInput,errorLines);errorInput.addEventListener('input',()=>syncLines(errorInput,errorLines))}
+document.getElementById('errorBtn').addEventListener('click',async function(){const val=errorInput.value.trim();if(!val)return;this.textContent='Analyzing...';this.disabled=true;const btn=this;const resultsBody=document.getElementById('errorResults');resultsBody.innerHTML='<div class="result-item"><span class="sev sev-info">Working</span><h4>Aadi-04 is decoding the error...</h4><p>Identifying the cause and the fix.</p></div>';const res=await aiAsk({prompt:val,code:'',lang:'text',mode:'errors'});if(res.ok){saveConv('errors',val,res.reply);resultsBody.innerHTML='<div class="ai-rich">'+renderAI(res.reply)+'</div>'}else{resultsBody.innerHTML='<div class="result-item"><span class="sev sev-warn">Error</span><h4>Analysis failed</h4><p>'+escHtml(res.error)+'</p></div>'}btn.textContent='Analyze Error';btn.disabled=false});
+// Debug
+const debugCode=document.getElementById('debugCode'),debugCodeLines=document.getElementById('debugCodeLines'),debugError=document.getElementById('debugError'),debugErrLines=document.getElementById('debugErrLines');
+if(debugCode&&debugCodeLines){syncLines(debugCode,debugCodeLines);debugCode.addEventListener('input',()=>syncLines(debugCode,debugCodeLines))}
+if(debugError&&debugErrLines){syncLines(debugError,debugErrLines);debugError.addEventListener('input',()=>syncLines(debugError,debugErrLines))}
+document.getElementById('debugBtn').addEventListener('click',async function(){const code=debugCode.value.trim(),err=debugError.value.trim();if(!code)return;this.textContent='Debugging...';this.disabled=true;const btn=this;const resultsBody=document.getElementById('debugResults');resultsBody.innerHTML='<div class="result-item"><span class="sev sev-info">Working</span><h4>Aadi-04 is debugging...</h4><p>Comparing the code against the error output.</p></div>';const res=await aiAsk({prompt:err,code,lang:'python',mode:'debug'});if(res.ok){saveConv('debug',code+(err?'\n\n[error output]\n'+err:''),res.reply);resultsBody.innerHTML='<div class="ai-rich">'+renderAI(res.reply)+'</div>'}else{resultsBody.innerHTML='<div class="result-item"><span class="sev sev-warn">Error</span><h4>Debug failed</h4><p>'+escHtml(res.error)+'</p></div>'}btn.textContent='Debug';btn.disabled=false});
+const fromLang=document.getElementById('fromLang'),toLang=document.getElementById('toLang'),fromLabel=document.getElementById('fromLabel'),toLabel=document.getElementById('toLabel'),outCode=document.getElementById('outCode'),outLines=document.getElementById('outLines');
+const conversions={JavaScript:'function greet(name) {\n  return "Hello, " + name;\n}',Python:'def greet(name):\n    return "Hello, " + name',TypeScript:'function greet(name: string): string {\n  return "Hello, " + name;\n}',Java:'public static String greet(String name) {\n    return "Hello, " + name;\n}','C++':'std::string greet(std::string name) {\n    return "Hello, " + name;\n}'};
+if(fromLang&&fromLabel)fromLang.addEventListener('change',e=>fromLabel.textContent=e.target.value);
+if(toLang&&toLabel)toLang.addEventListener('change',e=>toLabel.textContent=e.target.value);
+document.getElementById('convertBtn').addEventListener('click',async function(){const src=srcCode.value.trim();if(!src)return;const from=fromLang.value,to=toLang.value;this.textContent='Converting...';this.disabled=true;const btn=this;outCode.value='// Converting...';syncLines(outCode,outLines);const res=await aiAsk({prompt:'',code:src,lang:from.toLowerCase(),mode:'convert',toLang:to});if(res.ok){const cleaned=res.reply.replace(/```[a-zA-Z0-9+_-]*\s*/g,'').replace(/```/g,'').trim();outCode.value=cleaned;saveConv('convert',src,cleaned);syncLines(outCode,outLines)}else{outCode.value='// Conversion failed: '+res.error}syncLines(outCode,outLines);btn.textContent='Convert';btn.disabled=false});
+if(outCode&&outLines)syncLines(outCode,outLines);
+
+// ---- SETTINGS (themes + preferences; saved on this device) ----
+const THEMES=[
+ {id:'mint',name:'Mint',sub:'Green & white · default',sw:['#1a7f5a','#70e1b5','#f4f5f7']},
+ {id:'midnight',name:'Midnight',sub:'Dark',sw:['#34d399','#11161d','#0b0f14']},
+ {id:'ocean',name:'Ocean',sub:'Blue & white',sw:['#1d6fd1','#7cc0f5','#eef3f8']},
+ {id:'grape',name:'Grape',sub:'Purple & white',sw:['#6d3fc4','#c3a8f2','#f3f1f8']},
+ {id:'sunset',name:'Sunset',sub:'Warm amber',sw:['#c2661d','#f5b06a','#f7f0e8']}
+];
+const SET_DEFAULTS={theme:'mint',lang:'python',autoSave:true};
+let S={...SET_DEFAULTS};
+try{const raw=localStorage.getItem('ch_settings');if(raw)S={...SET_DEFAULTS,...JSON.parse(raw)}}catch(e){}
+function saveSettings(){try{localStorage.setItem('ch_settings',JSON.stringify(S))}catch(e){}}
+function applySettings(){
+  document.documentElement.dataset.theme=S.theme;
+  if(chatLang)chatLang.value=S.lang;
+  const sel=document.getElementById('setLang');if(sel)sel.value=S.lang;
+  const t=document.getElementById('setAutoSave');if(t)t.checked=!!S.autoSave;
+  document.querySelectorAll('.theme-card').forEach(c=>c.classList.toggle('sel',c.dataset.themeId===S.theme));
+  renderHl();
+}
+function buildThemeGrid(){
+  const grid=document.getElementById('themeGrid');if(!grid)return;
+  grid.innerHTML=THEMES.map(t=>'<button class="theme-card" data-theme-id="'+t.id+'" aria-label="'+t.name+' theme"><span class="theme-sw"><i style="background:'+t.sw[0]+'"></i><i style="background:'+t.sw[1]+'"></i><i style="background:'+t.sw[2]+'"></i></span><span><span class="theme-name">'+t.name+'</span><span class="theme-sub">'+t.sub+'</span></span><span class="theme-check">\u2713</span></button>').join('');
+  grid.querySelectorAll('.theme-card').forEach(c=>c.addEventListener('click',()=>{S.theme=c.dataset.themeId;saveSettings();applySettings()}));
+}
+function goTo(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));closeMenu()}
+function resetSettings(){S={...SET_DEFAULTS};saveSettings();applySettings()}
+document.getElementById('setLang').addEventListener('change',e=>{S.lang=e.target.value;saveSettings();chatLang.value=S.lang;renderHl()});
+document.getElementById('setAutoSave').addEventListener('change',e=>{S.autoSave=e.target.checked;saveSettings()});
+buildThemeGrid();applySettings();
+</script>
+</body>
+</html>
